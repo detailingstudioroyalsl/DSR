@@ -1,0 +1,1180 @@
+@charset "UTF-8"; /* Define la codificación del archivo CSS */
+
+/* Variables CSS globales que definen el estilo de la página */
+:root {
+  --font-family: "Open Sans", sans-serif; /* Fuente principal */
+  --content-width: 1170px; /* Ancho máximo del contenido principal */
+  --container-offset: 15px; /* Margen lateral del contenedor */
+  --container-width: calc(var(--content-width) + (var(--container-offset) * 2)); /* Ancho total del contenedor */
+}
+
+
+/* Establece el modelo de caja en el documento, incluyendo elementos pseudo */
+html {
+  -webkit-box-sizing: border-box; /* Define el comportamiento de las dimensiones en webkit */
+  box-sizing: border-box; /* Ajusta el cálculo de ancho y alto */
+}
+
+/* Aplica el modelo de caja a todos los elementos y sus pseudo-elementos */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit; /* Hereda la propiedad box-sizing del elemento padre */
+  box-sizing: inherit; /* Hace que el cálculo de las dimensiones sea consistente */
+}
+
+/* Estilo general de la página */
+.page {
+  height: 100%; /* La página ocupa el 100% de la altura disponible */
+  font-family: var(--font-family, sans-serif); /* Fuente definida en :root o sans-serif por defecto */
+  -webkit-text-size-adjust: 100%; /* Evita que el texto cambie de tamaño en dispositivos móviles */
+}
+
+/* Estilos para el cuerpo de la página */
+.page__body {
+  margin: 0; /* Elimina los márgenes predeterminados */
+  min-width: 320px; /* Ancho mínimo para garantizar una buena visualización en móviles */
+  min-height: 100%; /* La altura mínima es el 100% de la ventana */
+  font-size: 16px; /* Tamaño de fuente base */
+}
+
+/* Estilos para las imágenes */
+img {
+  height: auto; /* La altura se ajusta automáticamente */
+  max-width: 100%; /* La imagen no se extiende más allá de su contenedor */
+  -o-object-fit: cover; /* Asegura que la imagen cubra su contenedor en Opera */
+  object-fit: cover; /* Escala la imagen para que cubra el contenedor sin distorsionarse */
+}
+
+/* Enlaces */
+a {
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+/* Contenedor principal de la página */
+.site-container {
+  overflow: hidden; /* Oculta contenido que excede el tamaño del contenedor */
+}
+
+/* Oculta elementos visualmente pero los mantiene accesibles para tecnologías asistivas */
+.is-hidden {
+  display: none !important; /* Oculta el elemento por completo y usa !important para sobrescribir otros estilos */
+}
+
+/* Botón que elimina los estilos predeterminados */
+.btn-reset {
+  border: none; /* Sin borde */
+  padding: 0; /* Sin relleno */
+  background: transparent; /* Fondo transparente */
+  cursor: pointer; /* Aparece como un botón clicable */
+}
+
+/* Elimina los estilos predeterminados de listas */
+.list-reset {
+  list-style: none; /* Elimina las viñetas o números de la lista */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el relleno predeterminado */
+}
+
+/* Elimina los estilos predeterminados de los inputs */
+.input-reset {
+  -webkit-appearance: none; /* Elimina el estilo predeterminado en WebKit */
+  -moz-appearance: none; /* Elimina el estilo predeterminado en Firefox */
+  appearance: none; /* Elimina el estilo predeterminado en navegadores modernos */
+  border: none; /* Sin borde */
+  border-radius: 0; /* Sin esquinas redondeadas */
+  background-color: #cfd5c6; /* Fondo blanco */
+}
+
+/* Oculta los botones de búsqueda predeterminados en campos de búsqueda */
+.input-reset::-webkit-search-decoration,
+.input-reset::-webkit-search-cancel-button,
+.input-reset::-webkit-search-results-button,
+.input-reset::-webkit-search-results-decoration {
+  display: none; /* Oculta los elementos mencionados */
+}
+
+/* Elementos visualmente ocultos, pero accesibles para lectores de pantalla */
+.visually-hidden {
+  position: absolute; /* Posiciona fuera del flujo normal del documento */
+  overflow: hidden; /* Oculta cualquier contenido que se desborde */
+  margin: -1px; /* Mueve el elemento fuera de la vista */
+  border: 0; /* Elimina el borde */
+  padding: 0; /* Elimina el relleno */
+  width: 1px; /* Establece un tamaño mínimo para mantener el elemento accesible */
+  height: 1px;
+  clip: rect(0 0 0 0); /* Oculta el elemento visualmente pero lo hace accesible */
+}
+
+/* Contenedor principal con márgenes automáticos */
+.container {
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  padding: 0 var(--container-offset); /* Aplica relleno lateral usando la variable */
+  max-width: var(--container-width); /* Limita el ancho máximo del contenedor */
+}
+
+@media (max-width: 1110px) {
+  .container {
+    padding: 0 30px; /* Reduce el relleno lateral en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 899px) {
+  .container {
+    padding: 0 16px; /* Rellena aún más en pantallas muy pequeñas */
+  }
+}
+
+/* Oculta los contornos de elementos cuando no están enfocados de manera visible */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none; /* No muestra borde de enfoque */
+}
+
+/* Centra el texto */
+.centered {
+  text-align: center; /* Texto alineado al centro */
+}
+
+/* Evita que la página se desplace */
+.dis-scroll {
+  position: fixed; /* Posiciona de manera fija el elemento en la pantalla */
+  left: 0;
+  top: 0;
+  overflow: hidden; /* Oculta cualquier contenido que se desborde */
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  -ms-scroll-chaining: none; /* Deshabilita el chaining de scroll en Internet Explorer */
+  overscroll-behavior: none; /* Evita el comportamiento de desplazamiento adicional en otros navegadores */
+}
+
+.page--ios .dis-scroll {
+  position: relative; /* En dispositivos iOS, ajusta la posición relativa */
+}
+
+/* Estilos para la cabecera */
+.header {
+  padding-top: 28px; /* Rellena la parte superior */
+  position: absolute; /* Posiciona la cabecera en la parte superior */
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho */
+  z-index: 2; /* Coloca la cabecera por encima de otros elementos */
+}
+
+@media (max-width: 1160px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 30px; /* Ajusta el relleno lateral en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 899px) {
+  .header {
+    padding: 0; /* Elimina el relleno en pantallas muy pequeñas */
+  }
+}
+
+/* Contenedor de la cabecera, con alineación y separación de los elementos internos */
+.header__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* Hace que el contenedor use Flexbox */
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; /* Espacio igual entre los elementos */
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; /* Alinea los elementos al centro verticalmente */
+  padding: 0px 46px 23px 30px; /* Rellena el contenedor */
+  position: relative; /* Permite el uso de posicionamiento absoluto en elementos hijos */
+  -webkit-transition: 0.3s ease-out;
+  -o-transition: 0.3s ease-out;
+  transition: 0.3s ease-out; /* Transiciones suaves para cambios de estado */
+}
+
+/* La cabecera alterna bordes y rellenos según sea par o impar */
+.header__container:nth-of-type(odd) {
+  border-bottom: 1px solid #EEEEEE; /* Aplica borde inferior a contenedores impares */
+}
+
+.header__container:nth-of-type(even) {
+  padding: 19px 46px 0 30px; /* Ajusta el relleno en contenedores pares */
+}
+
+@media (max-width: 1160px) {
+  .header__container:nth-of-type(even) {
+    padding: 13px 0px; /* Ajusta el relleno en pantallas pequeñas */
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 899px) {
+  .header__container:nth-of-type(even) {
+    padding: 10px; /* Ajuste adicional en pantallas pequeñas */
+  }
+}
+
+
+/* Contenedor de cabecera cuando está fijo en la parte superior de la página */
+.header__container--fixed {
+  position: fixed; /* Fija la cabecera en la parte superior de la página */
+  top: 0; /* Alineado en la parte superior */
+  left: 0; /* Alineado a la izquierda */
+  border-bottom: 1px solid #cfd5c6 !important; /* Borde inferior blanco */
+  border-top: none !important; /* Elimina el borde superior */
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  background: #0c101e ; /* Fondo oscuro */
+}
+
+/* Estilo interno para los elementos de la cabecera */
+.header__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* Usa Flexbox para organizar los elementos */
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; /* Centra verticalmente los elementos */
+  gap: 30px; /* Espacio entre elementos */
+}
+
+/* Contenedor de los iconos de redes sociales */
+.header__socials {
+  display: flex; /* Usa Flexbox para alinear los iconos en fila */
+  list-style: none; /* Elimina los puntos de la lista */
+  gap: 15px; /* Espacio entre los iconos */
+  padding: 0; /* Elimina el padding predeterminado */
+  margin: 0 0 0 32px; /* Aplica margen izquierdo de 32px para separar del resto del contenido */
+}
+
+/* Estilos generales para los enlaces de las redes sociales */
+.header__socials a {
+  font-size: 150%; /* Aumenta el tamaño del icono (doble de su tamaño original) */
+  color: #9dc16e; /* Aplica el color verde #9dc16e a los iconos */
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  transition: color 0.3s ease; /* Transición suave de 0.3 segundos para el cambio de color */
+}
+
+/* Estilos específicos para iconos SVG personalizados (Instagram, Facebook, TikTok) */
+.header__socials img {
+  width: 40px; /* Establece un ancho de 40px para los iconos SVG */
+  height: 40px; /* Establece una altura de 40px para los iconos SVG */
+  
+}
+
+/* Estilos para el efecto hover (cuando el usuario pasa el ratón sobre los iconos) */
+.header__socials a:hover {
+  color: #76a04e; /* Cambia el color a un tono más oscuro de verde al hacer hover */
+}
+
+/* Estilo para los enlaces visitados (cuando el usuario ya ha hecho clic en el enlace) */
+.header__socials a:visited {
+  color: #9dc16e; /* Mantiene el color verde #9dc16e después de que el enlace haya sido visitado */
+}
+
+
+@media (max-width: 1160px) {
+  .header__socials {
+    margin-left: 0; /* Elimina el margen en pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 375px) {
+  .header__tel.link__tel {
+    font-size: 10px; /* Ajusta el tamaño de la fuente del teléfono en pantallas pequeñas */
+	text-align: right; /* Alinea el texto a la derecha */
+  }
+}
+
+/* Estilo para el enlace del teléfono en la cabecera */
+.link__tel {
+  font-family: "Roboto Slab", sans-serif; /* Usa la fuente Roboto Slab */
+  font-weight: 700; /* Fuente en negrita */
+  font-size: 18px; /* Tamaño de fuente */
+  line-height: 100%; /* Altura de línea */
+  letter-spacing: 0.05em; /* Espaciado entre letras */
+  color: #9dc16e; /* Color verde */
+}
+
+/* Estilo para el enlace del correo en la cabecera */
+.link__mail {
+  font-family: "Roboto Slab"; /* Fuente Roboto Slab */
+  font-weight: 700; /* Negrita */
+  font-size: 16px; /* Tamaño de fuente */
+  line-height: 150%; /* Altura de línea */
+  color: #9dc16e; /* Color verde */
+}
+
+.city-title {
+  font-family: "Roboto Slab"; /* Fuente Roboto Slab */
+  font-weight: 700; /* Negrita */
+  font-size: 16px; /* Tamaño de fuente */
+  line-height: 150%; /* Altura de línea */
+  color: #9dc16e; /* Color verde */
+}
+
+/* Menú principal */
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* Usa Flexbox para organizar los elementos */
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; /* Espacio entre elementos */
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; /* Alinea verticalmente */
+  width: 100%; /* Ocupa todo el ancho */
+  gap: 50px; /* Espacio entre los elementos */
+}
+
+@media (max-width: 1160px) {
+  .menu {
+    width: auto; /* Ajusta el ancho del menú en pantallas pequeñas */
+  }
+}
+
+.menu__inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* Organiza los elementos en fila */
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; /* Alinea los elementos al centro verticalmente */
+  list-style: none; /* Elimina los puntos de las listas */
+  padding: 0; /* Elimina el relleno */
+  margin: 0; /* Elimina los márgenes */
+  color: #9dc16e; /* Color verde */
+}
+
+/* Alinea el último elemento del menú a la derecha */
+.menu__inner:last-of-type {
+  justify-content: flex-end; /* Alinea el contenido al final (derecha) */
+}
+
+
+/* Estilos de los elementos del menú */
+.menu__item {
+  font-weight: 700; /* Fuente en negrita */
+  font-size: 14px; /* Tamaño de fuente */
+  line-height: 150%; /* Altura de línea */
+  letter-spacing: 0.05em; /* Espaciado entre letras */
+  text-transform: uppercase; /* Mayúsculas */
+  color: #cfd5c6; /* Color blanco */
+  margin: 0 15px; /* Margen entre elementos */
+  max-width: 175px; /* Ancho máximo */
+  position: relative; /* Permite el uso de posicionamiento absoluto en elementos hijos */
+  -webkit-transition: 0.3s ease-out;
+  -o-transition: 0.3s ease-out;
+  transition: 0.3s ease-out; /* Transición suave */
+  padding-bottom: 17px; /* Relleno inferior */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el elemento */
+  text-align: center; /* Alinea el texto al centro */
+  color: #9dc16e; /* Color blanco */
+}
+
+@media (max-width: 1160px) {
+  .menu__item {
+    padding: 7px 0; /* Ajusta el relleno en pantallas pequeñas */
+  }
+}
+
+/* Enlace dentro del elemento del menú */
+.menu__item-link {
+  color: #cfd5c6; /* Color blanco */
+  -webkit-transition: 0.3s ease-out;
+  -o-transition: 0.3s ease-out;
+  transition: 0.3s ease-out; /* Transición suave al pasar el cursor */
+}
+
+/* El primer y último elemento del menú no tienen márgenes laterales */
+.menu__item:first-of-type {
+  margin-left: 0; /* Sin margen izquierdo */
+}
+.menu__item:last-of-type {
+  margin-right: 0; /* Sin margen derecho */
+}
+
+/* Cambio de color al pasar el cursor sobre el elemento del menú */
+.menu__item:hover {
+  color: #cfd5c6; /* Color gris */
+}
+.menu__item:hover > .menu__item-link {
+  color: #cfd5c6; /* Cambia el color del enlace también */
+}
+
+/* Estilo para el cuerpo de la página */
+body {
+  font-family: "Proxima Nova"; /* Fuente Proxima Nova */
+  font-weight: 400; /* Fuente de peso regular */
+  font-size: 16px; /* Tamaño de fuente base */
+  line-height: 135%; /* Altura de línea */
+  color: #cfd5c6; /* Color de texto blanco */
+  background-color: #0c101e;
+}
+
+/* Estilo para el contenedor del video */
+.video-wrapper {
+  position: absolute; /* Posición absoluta dentro del contenedor */
+  top: 0; /* Alineado en la parte superior */
+  bottom: 0; /* Alineado en la parte inferior */
+  left: 0; /* Alineado a la izquierda */
+  right: 0; /* Alineado a la derecha */
+  opacity: 0.5; /* Video semitransparente */
+}
+
+.video-wrapper::after {
+  position: absolute; /* Posición absoluta para el pseudo-elemento */
+  content: ""; /* Pseudo-elemento vacío */
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
+  background-repeat: repeat; /* Repetición de fondo */
+  background-position: center; /* Posiciona el fondo al centro */
+  top: 0; /* Alineado en la parte superior */
+  left: 0; /* Alineado a la izquierda */
+  z-index: 0; /* Envío al fondo del stack */
+}
+
+/* Estilo para el video dentro del contenedor */
+.video-wrapper video {
+  -o-object-fit: cover;
+  object-fit: cover; /* Asegura que el video cubra el contenedor */
+}
+
+/* Sección principal con altura completa */
+.main-section {
+  position: relative; /* Posicionamiento relativo dentro del documento */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; /* Usa Flexbox para organizar los elementos */
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; /* Organiza los elementos en una columna */
+  background: #0c101e ; /* Fondo oscuro */
+}
+
+/* Título principal de la sección */
+.main__title {
+  font-weight: 700; /* Fuente en negrita */
+  font-size: 96px; /* Tamaño grande de fuente */
+  line-height: 90%; /* Altura de línea compacta */
+  letter-spacing: 0.1em; /* Espaciado entre letras */
+  text-transform: uppercase; /* Mayúsculas */
+  color: #9dc16e; /* Color verde */
+  max-width: 1080px; /* Ancho máximo del texto */
+  text-align: center; /* Texto centrado */
+  position: absolute; /* Posición absoluta dentro del contenedor */
+  top: 50%; /* Centrado verticalmente */
+  left: 50%; /* Centrado horizontalmente */
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Efecto de centrado usando transformaciones */
+  margin: 0; /* Sin márgenes */
+  z-index: 1; /* Asegura que el título esté sobre otros elementos */
+}
+
+@media (max-width: 1160px) {
+  .main__title {
+    -webkit-transform: translate(-50%, 0%);
+    -ms-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%); /* Ajuste del título para pantallas más pequeñas */
+  }
+}
+
+@media (max-width: 899px) {
+  .main__title {
+    font-size: 11.25vw; /* El tamaño de fuente es responsive basado en el ancho de la ventana */
+  }
+}
+
+/* Estilo general para una sección */
+.section {
+  background: #0c101e ; /* Fondo oscuro */
+  padding-top: 10px; /* Espacio interno en la parte superior de la sección */
+  padding-bottom: 10px; /* Espacio interno en la parte inferior de la sección */
+  margin-bottom: 10px; /* Espacio externo que afecta la separación entre secciones */
+}
+
+@media (max-width: 899px) {
+  .section {
+    padding-top: 10px; /* Espacio interno en la parte superior de la sección */
+	padding-bottom: 10px; /* Espacio interno en la parte inferior de la sección */
+	margin-bottom: 10px; /* Espacio externo que afecta la separación entre secciones */
+  }
+}
+
+/* Sección con fondo claro */
+.section--light {
+  background: none; /* Elimina el fondo oscuro */
+}
+
+/* Título dentro de la sección */
+.section__title {
+  font-family: "Roboto Slab"; /* Fuente Roboto Slab */
+  font-weight: 700; /* Negrita */
+  font-size: 38px; /* Tamaño grande de fuente */
+  line-height: 90.5%; /* Altura de línea compacta */
+  color: #cfd5c6; /* Texto blanco */
+  text-align: center; /* Centra el texto */
+  margin: 0 auto 38px; /* Margen inferior y centrado */
+  max-width: 1070px; /* Ancho máximo del título */
+  position: relative; /* Posicionamiento relativo dentro de la sección */
+  z-index: 1; /* Asegura que esté en la parte superior de la sección */
+  color: #9dc16e; /* Color verde */
+}
+
+@media (max-width: 570px) {
+  .section__title {
+    font-size: 22px; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+    margin-bottom: 25px; /* Reduce el margen inferior */
+  }
+}
+
+.section__title::after {
+  content: ""; /* Pseudo-elemento vacío */
+  width: 100%; /* Ancho completo */
+  margin: 30px auto 0; /* Margen superior */
+  height: 4px; /* Altura de la línea */
+  display: block; /* Se comporta como un bloque */
+  background-color: #cfd5c6; /* Línea blanca debajo del título */
+}
+
+@media (max-width: 570px) {
+  .section__title::after {
+    margin-top: 15px; /* Menor margen en pantallas pequeñas */
+  }
+}
+
+/* Variación del título con estilo claro */
+.section__title--light {
+  color: #0c101e ; /* Color de texto oscuro */
+}
+
+.section__title--light::after {
+  display: none; /* Elimina la línea debajo del título */
+}
+
+/* Subtítulo dentro de una sección */
+.section__subtitle {
+  font-size: 20px; /* Tamaño de fuente moderado */
+  line-height: 135%; /* Altura de línea */
+  color: #cfd5c6; /* Texto blanco */
+  text-align: center; /* Texto centrado */
+  margin: 0 auto 30px; /* Centrado con margen inferior */
+  position: relative; /* Posicionamiento relativo */
+  z-index: 1; /* Asegura que el subtítulo esté visible */
+}
+
+@media (max-width: 570px) {
+  .section__subtitle {
+    margin-bottom: 20px; /* Ajusta el margen en pantallas pequeñas */
+  }
+}
+
+/* Variación del subtítulo con estilo claro */
+.section__subtitle--light {
+  color: #0c101e ; /* Texto oscuro */
+  font-weight: 700; /* Negrita */
+}
+
+/* Texto dentro de una sección */
+.section__text {
+  margin: 0 0 1rem; /* Margen inferior entre párrafos */
+}
+
+.section__text:last-of-type {
+  margin: 0; /* Elimina el margen inferior en el último párrafo */
+}
+
+/* Texto en color dorado dentro de una sección */
+.section__text .gold {
+  color: #C5B27D; /* Texto dorado */
+}
+
+/* Clase para texto en negrita */
+.bold {
+  font-weight: 700; /* Negrita */
+}
+
+/* Texto en negrita especial */
+.bold--visited {
+  font-size: 20px; /* Tamaño de fuente aumentado */
+}
+
+/* Sección "about" con margen inferior */
+.about {
+  padding-bottom: 10px; /* Espaciado inferior */
+}
+
+/* Estilos para la sección "about" */
+.about__inner {
+  display: flex; /* Usa Flexbox para alinear el texto y la imagen */
+  justify-content: space-between; /* Espacio entre el texto y la imagen */
+  align-items: center; /* Alinea el contenido verticalmente al centro */
+  gap: 10px; /* Espacio entre el texto y la imagen */
+  padding-bottom: 10px; /* Mantiene el padding inferior existente */
+}
+
+/* Estilo para el texto dentro de la sección "about" */
+.about__subtitle {
+  width: 50%; /* El texto ocupa el 50% del ancho de la sección */
+  text-align: left; /* Alinea el texto a la izquierda */
+  font-size: 16px; /* Tamaño de fuente para el texto general */
+  line-height: 1.5; /* Altura de línea para mejor legibilidad */
+  color: #cfd5c6; /* Color para el texto general */
+  padding-right: 10px; /* Añade espacio entre el texto y la imagen */
+}
+
+/* Estilo para el texto en <strong> dentro de la sección "about" */
+.about__subtitle strong {
+  color: #9dc16e; /* Color verde para el texto en strong */
+  font-size: 18px; /* Tamaño más grande para el texto en strong */
+}
+
+
+/* Estilo para la imagen */
+.about__image {
+  width: 45%; /* La imagen ocupa el 45% del ancho de la sección */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Asegura que la imagen cubra su contenedor sin distorsión */
+  border-radius: 8px; /* Aplica un borde redondeado para mejorar la estética */
+}
+
+/* Estilo para la imagen */
+.about__precios {
+  width: 180%; /* La imagen ocupa el 45% del ancho de la sección */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Asegura que la imagen cubra su contenedor sin distorsión */
+  border-radius: 8px; /* Aplica un borde redondeado para mejorar la estética */
+}
+
+/* Responsive: para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .about__inner {
+    flex-direction: column; /* Apila el texto y la imagen verticalmente */
+    text-align: center; /* Centra el texto y la imagen en pantallas pequeñas */
+  }
+
+  .about__subtitle, .about__image {
+    width: 100%; /* Ocupan todo el ancho en pantallas pequeñas */
+  }
+
+  .about__image {
+    margin-top: 10px; /* Añade un margen superior a la imagen en pantallas pequeñas */
+  }
+}
+
+/* Sección "services" con espaciado horizontal */
+.services {
+  padding-left: 30px; /* Espaciado izquierdo */
+  padding-right: 30px; /* Espaciado derecho */
+}
+
+@media (max-width: 899px) {
+  .services {
+    padding-left: 16px; /* Ajusta el espaciado en pantallas pequeñas */
+    padding-right: 16px; /* Ajusta el espaciado en pantallas pequeñas */
+  }
+}
+
+/* Contenedor interno de la sección "services" */
+.services__inner {
+  max-width: 1080px; /* Ancho máximo del contenido */
+  margin: 0 auto; /* Centrado horizontal */
+  display: -webkit-box; /* Flexbox antiguo */
+  display: -ms-flexbox; /* Flexbox antiguo */
+  display: flex; /* Flexbox para organizar los elementos */
+  -webkit-box-pack: justify; /* Justificación en Flexbox */
+  -ms-flex-pack: justify;
+  justify-content: space-between; /* Distribución de los elementos */
+  position: relative; /* Posicionamiento relativo */
+  z-index: 1; /* Define la capa del contenedor */
+  gap: 30px; /* Espacio entre los elementos */
+}
+
+/* Primer ítem interno de la sección "services" con margen inferior */
+.services__inner:first-of-type {
+  margin-bottom: 30px; /* Espaciado inferior */
+}
+
+@media (max-width: 1020px) {
+  .services__inner {
+    gap: 10px; /* Ajuste del espacio entre ítems en pantallas medianas */
+  }
+}
+
+@media (max-width: 978px) {
+  .services__inner {
+    -webkit-box-orient: vertical; /* Flexbox en orientación vertical */
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; /* Coloca los elementos en columna */
+    -webkit-box-align: center; /* Alineación central */
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 30px; /* Espaciado entre ítems */
+  }
+}
+
+/* Ítems individuales de la sección "services" */
+.services__item {
+  max-width: 337px; /* Ancho máximo de cada ítem */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  display: -webkit-box; /* Flexbox antiguo */
+  display: -ms-flexbox;
+  display: flex; /* Flexbox para organizar el contenido del ítem */
+  -webkit-box-orient: vertical; /* Flexbox en orientación vertical */
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; /* Organiza los elementos en columna */
+}
+
+/* Texto dentro de los ítems de la sección "services" */
+.services__item-text {
+  color: #cfd5c6; /* Texto en color blanco */
+  font-weight: 700; /* Texto en negrita */
+  text-align: center; /* Texto centrado */
+  font-size: 24px; /* Tamaño del texto */
+  width: 100%; /* Ancho completo */
+  padding: 0 10px; /* Espaciado interno en los laterales */
+  margin: 20px auto 0; /* Espaciado superior */
+  height: 3rem; /* Altura fija del contenedor de texto */
+}
+
+@media (max-width: 570px) {
+  .services__item-text {
+    margin-top: 10px; /* Ajusta el margen superior en pantallas pequeñas */
+  }
+}
+
+/* Imagen dentro de los ítems de la sección "services" */
+.services__item-image {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  height: 100%; /* Ocupa toda la altura disponible */
+  max-height: inherit; /* Altura máxima heredada del contenedor */
+}
+
+/* Contenedor que envuelve cada ítem de la sección "services" */
+.services__item-wrapper {
+  position: relative; /* Posicionamiento relativo para superposiciones */
+  height: 100%; /* Ocupa toda la altura disponible */
+}
+
+/* Pseudo-elemento que aparece sobre los ítems al hacer hover */
+.services__item-wrapper::after {
+  content: "Detalle"; /* Texto del pseudo-elemento (en ruso: "Más detalles") */
+  position: absolute; /* Posicionamiento absoluto dentro del ítem */
+  top: 50%; /* Centrado verticalmente */
+  left: 0; /* Alineado a la izquierda */
+  right: 0; /* Alineado a la derecha */
+  -webkit-transform: translateY(-50%); /* Centrado vertical */
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); /* Transformación para centrar */
+  text-align: center; /* Texto centrado */
+  padding: 16px 0; /* Espaciado interno */
+  background-color: #cfd5c6; /* Fondo blanco */
+  font-family: "Proxima Nova", sans-serif; /* Fuente personalizada */
+  font-weight: 600; /* Texto en seminegrita */
+  font-size: 15px; /* Tamaño de fuente */
+  line-height: 140%; /* Altura de línea */
+  letter-spacing: 0.04em; /* Espaciado entre letras */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  color: #9dc16e; /* Texto en color dorado */
+  z-index: 1; /* Coloca el pseudo-elemento por encima del contenido */
+  opacity: 0; /* Inicialmente oculto */
+  -webkit-transition: 0.3s ease-in-out; /* Transiciones suaves */
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out; /* Transiciones para mostrar el pseudo-elemento */
+}
+
+/* Superposición dentro de los ítems de la sección "services" */
+.services__item-overlay {
+  position: relative; /* Posicionamiento relativo */
+  top: 0; /* Alineado al borde superior */
+  bottom: 0; /* Alineado al borde inferior */
+  left: 0; /* Alineado al borde izquierdo */
+  right: 0; /* Alineado al borde derecho */
+  border: 5px solid transparent; /* Borde transparente por defecto */
+  -webkit-transition: 0.3s ease-in-out; /* Transiciones suaves */
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out; /* Transición para mostrar el borde */
+  max-height: 226px; /* Altura máxima */
+  height: 100%; /* Ocupa toda la altura disponible */
+}
+
+/* Superposición que aparece al hacer hover sobre un ítem de la sección "services" */
+.services__item-overlay::after {
+  content: ""; /* Contenido vacío */
+  position: absolute; /* Posicionamiento absoluto */
+  top: 0; /* Alineado al borde superior */
+  bottom: 0; /* Alineado al borde inferior */
+  left: 0; /* Alineado al borde izquierdo */
+  right: 0; /* Alineado al borde derecho */
+  background: rgba(0, 0, 0, 0); /* Fondo transparente inicialmente */
+  -webkit-transition: 0.3s ease-in-out; /* Transiciones suaves */
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out; /* Transiciones para cambiar el fondo */
+}
+
+/* Aplica efectos al hacer hover sobre los ítems de la sección "services" */
+.services__item:hover .services__item-overlay {
+  border: 5px solid #cfd5c6; /* Muestra un borde blanco */
+}
+
+.services__item:hover .services__item-overlay::after {
+  background: rgba(0, 0, 0, 0.5); /* Aplica una superposición oscura */
+}
+
+.services__item:hover .services__item-wrapper::after {
+  opacity: 1; /* Muestra el texto "Подробнее" al hacer hover */
+}
+
+/* Para pantallas pequeñas, ajusta la superposición y el texto de los ítems en "services" */
+@media (max-width: 978px) {
+  .services__item-overlay {
+    position: relative; /* Posiciona la superposición de manera relativa */
+    border-color: #cfd5c6; /* Aplica un borde blanco */
+  }
+  
+  .services__item-overlay::after {
+    display: none; /* Oculta la superposición en pantallas pequeñas */
+  }
+  
+  .services__item-wrapper {
+    padding-bottom: 59px; /* Ajusta el espaciado en la parte inferior del ítem */
+  }
+  
+  .services__item-wrapper::after {
+    opacity: 1; /* Muestra el texto de "Подробнее" */
+    top: unset; /* Elimina el valor superior */
+    bottom: 0; /* Alinea el texto en la parte inferior */
+    -webkit-transform: none; /* Elimina la transformación previa */
+    -ms-transform: none;
+    transform: none; /* Elimina el centrado vertical */
+    padding: 19px 0; /* Ajusta el espaciado interno */
+  }
+}
+
+/* Enlace que actúa como botón dentro de la sección "services" */
+.services__link {
+  font-weight: 600; /* Negrita para el texto */
+  font-size: 15px; /* Tamaño del texto */
+  line-height: 140%; /* Altura de línea */
+  padding: 20px; /* Espaciado interno */
+  margin: 50px auto 35px; /* Márgenes superior e inferior */
+  text-align: center; /* Alineación centrada */
+  letter-spacing: 0.04em; /* Espaciado entre letras */
+  display: block; /* Hace que el enlace ocupe toda la línea */
+  max-width: 320px; /* Ancho máximo del enlace */
+  background: #cfd5c6; /* Fondo blanco */
+  color: #0c101e ; /* Texto en color oscuro */
+  text-transform: uppercase; /* Texto en mayúsculas */
+  position: relative; /* Posicionamiento relativo */
+  z-index: 1; /* Asegura que esté encima de otros elementos */
+  -webkit-transition: 0.3s ease-out; /* Transición suave al interactuar */
+  -o-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+}
+
+/* Cambia el color del botón al pasar el ratón por encima */
+.services__link:hover {
+  background: #C5B27D; /* Fondo dorado */
+  color: #cfd5c6; /* Texto en blanco */
+}
+
+/* Sección de la galería con padding a los lados y parte inferior */
+.gallery {
+  padding-left: 30px; /* Padding en el lado izquierdo */
+  padding-right: 30px; /* Padding en el lado derecho */
+  padding-bottom: 50px; /* Padding en la parte inferior */
+  position: relative; /* Posicionamiento relativo */
+}
+
+@media (max-width: 899px) {
+  .gallery {
+    padding-left: 16px; /* Ajuste del padding en pantallas pequeñas */
+    padding-right: 16px; /* Ajuste del padding en pantallas pequeñas */
+  }
+}
+
+/* Contenedor interno de la galería */
+.gallery__inner {
+  max-width: 1070px; /* Ancho máximo */
+  margin: 0 auto; /* Centrado horizontal */
+  display: -webkit-box; /* Flexbox antiguo */
+  display: -ms-flexbox;
+  display: flex; /* Uso de Flexbox para organizar los elementos */
+  -webkit-box-pack: justify; /* Justificación en Flexbox */
+  -ms-flex-pack: justify;
+  justify-content: space-between; /* Distribuye los elementos */
+  position: relative; /* Posicionamiento relativo */
+  z-index: 1; /* Asegura que esté por encima de otros elementos */
+  gap: 30px; /* Espacio entre los elementos */
+}
+
+.gallery__inner:first-of-type {
+  margin-bottom: 30px; /* Espaciado inferior para el primer ítem */
+}
+
+@media (max-width: 768px) {
+  .gallery__inner {
+    -webkit-box-orient: vertical; /* Ajuste de orientación en pantallas pequeñas */
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; /* Disposición vertical */
+    -webkit-box-align: center; /* Alineación centrada */
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+/* Título de la galería */
+.gallery__title {
+  color: #9dc16e;
+  margin-bottom: 15px; /* Espaciado inferior */
+}
+
+/* Footer (pie de página) */
+.footer {
+  background: #0c101e ; /* Fondo oscuro */
+}
+
+/* Contenedor principal del footer */
+.footer__container {
+  padding: 10px 10px 10px; /* Espaciado interno superior, derecho e inferior */
+  display: -webkit-box; /* Flexbox (estilo antiguo) */
+  display: -ms-flexbox;
+  display: flex; /* Flexbox para organizar los ítems */
+  -webkit-box-align: center; /* Alinea verticalmente los elementos en el centro */
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px; /* Espacio entre los ítems */
+}
+
+@media (max-width: 899px) {
+  .footer__container {
+    display: none; /* Oculta el contenedor en pantallas pequeñas */
+  }
+}
+
+/* Wrapper del footer */
+.footer__wrapper {
+  width: 100%; /* Ancho completo */
+}
+
+/* Contenedor interno del footer con justificación entre los elementos */
+.footer__inner {
+  display: -webkit-box; /* Flexbox (estilo antiguo) */
+  display: -ms-flexbox;
+  display: flex; /* Flexbox para organizar los ítems */
+  -webkit-box-pack: justify; /* Justificación entre elementos (Flexbox) */
+  -ms-flex-pack: justify;
+  justify-content: space-between; /* Espacio entre ítems */
+  padding: 27px 0 23px; /* Espaciado interno arriba y abajo */
+  border-top: 4px solid #cfd5c6; /* Borde blanco en la parte superior */
+  border-bottom: 4px solid #cfd5c6; /* Borde blanco en la parte inferior */
+  gap: 10px; /* Espacio entre los elementos */
+}
+
+/* Último contenedor interno del footer */
+.footer__inner:last-of-type {
+  padding-top: 24px; /* Espaciado superior */
+  padding-bottom: 0; /* Sin espaciado inferior */
+  margin-bottom: 28px; /* Espaciado inferior */
+  border: none; /* Sin bordes */
+}
+
+/* Wrapper interno para organizar ítems en el footer */
+.footer__inner-shell {
+  display: -webkit-box; /* Flexbox (estilo antiguo) */
+  display: -ms-flexbox;
+  display: flex; /* Flexbox para organizar los ítems */
+  -webkit-box-pack: justify; /* Justificación en Flexbox */
+  -ms-flex-pack: justify;
+  justify-content: space-between; /* Espaciado entre ítems */
+  max-width: 768px; /* Ancho máximo */
+  width: 100%; /* Ancho completo */
+}
+
+/* Último wrapper interno del footer */
+.footer__inner-shell:last-of-type {
+  -webkit-box-orient: vertical; /* Organización vertical (estilo antiguo) */
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; /* Organización vertical */
+  -webkit-box-align: end; /* Alineación de los ítems al final */
+  -ms-flex-align: end;
+  align-items: flex-end; /* Alinea los ítems al final */
+  max-width: -webkit-fit-content; /* Ajusta el contenido automáticamente */
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+/* El primer contenedor de contenido del footer */
+.footer__content-shell:first-of-type {
+  margin-bottom: 28px; /* Espaciado inferior */
+}
+
+@media (max-width: 899px) {
+  .footer__content-shell {
+    display: -webkit-box; /* Flexbox (estilo antiguo) */
+    display: -ms-flexbox;
+    display: flex; /* Flexbox para organizar los ítems */
+    -webkit-box-orient: vertical; /* Organización vertical */
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; /* Organización vertical */
+    -webkit-box-align: center; /* Alinea los ítems en el centro */
+    -ms-flex-align: center;
+    align-items: center; /* Alineación centrada */
+    margin-bottom: 20px; /* Espaciado inferior */
+  }
+}
+
+/* Logo dentro del header */
+.header__logo-image {
+    width: 300px; /* Ancho del logo */
+    margin-right: 20px; /* Espaciado a la derecha */
+}
+/* Logo dentro del footer */
+.footer__logo-img {
+	margin-right: 1px;
+    width: 140px; /* Ancho del logo */
+    margin-right: 20px; /* Espaciado a la derecha */
+}
+
+/* Wrapper del logo dentro del footer */
+.footer .logo-wrapper {
+  display: -webkit-box; /* Flexbox (estilo antiguo) */
+  display: -ms-flexbox;
+  display: flex; /* Flexbox para organizar los ítems */
+  -webkit-box-align: center; /* Alineación vertical centrada */
+  -ms-flex-align: center;
+  align-items: center; /* Alineación centrada */
+  width: 100%; /* Ancho completo */
+  gap: 16px; /* Espaciado entre los ítems */
+}
+
+/* Línea decorativa después del logo en el footer */
+.footer .logo-wrapper::after {
+  content: ""; /* Elemento vacío que actúa como línea */
+  display: block; /* Se comporta como bloque */
+  width: 100%; /* Ancho completo */
+  height: 4px; /* Altura de la línea */
+  background: #cfd5c6; /* Color de fondo blanco */
+}
+
+/* Texto dentro del footer */
+.footer__text {
+  margin: 0 0 10px; /* Espaciado inferior */
+  color: #9dc16e;
+}
+
+/* Texto destacado en negrita dentro del footer */
+.footer__bold {
+  display: inline-block; /* Comportamiento en línea y bloque */
+  margin: 0; /* Sin márgenes */
+}
+
+@media (max-width: 899px) {
+  .footer__bold {
+    text-align: center; /* Alineación centrada en pantallas pequeñas */
+  }
+}
+
+/* Contenido de contacto dentro del footer */
+.footer__call {
+  margin-bottom: 12px; /* Espaciado inferior */
+}
+
+@media (max-width: 899px) {
+  .footer__call {
+    margin: 20px auto 25px; /* Espaciado superior e inferior en pantallas pequeñas */
+  }
+}
+
+/* Texto del teléfono dentro del footer */
+.footer__tel {
+	margin-right: 28px;
+	margin-bottom: 5px; /* Espaciado inferior */
+}
+
+/* Texto del correo dentro del footer */
+.footer__mail {
+	margin-right: 28px;
+	margin-bottom: 20px; /* Espaciado inferior */
+}
+
+@media (max-width: 899px) {
+  .footer__mail {
+    font-size: 20px; /* Tamaño de texto más grande en pantallas pequeñas */
+    margin-bottom: 25px; /* Espaciado inferior */
+  }
+}
+
+.footer__content-map {
+	display: flex; /* Flexbox para organizar los ítems */
+	justify-content: flex-start; /* Alinea el contenido (iframe) a la izquierda */
+	margin-left: 0;
+	width: 500px; /* Ancho del iframe */
+	height: 150px; /* Altura del iframe */
+	border: none; /* Elimina el borde */
+  /* No es necesario trasladar 'allowfullscreen' y 'loading' a CSS, ya que son atributos HTML */
+ }
+ 
+ @media (max-width: 899px) {
+  .footer__content-map {
+	display: flex; /* Flexbox para organizar los ítems */
+	justify-content: flex-start; /* Alinea el contenido (iframe) a la izquierda */
+    margin-bottom: 25px; /* Espaciado inferior */
+	width: 250px; /* Ancho del iframe */
+	height: 175px; /* Altura del iframe */
+	border: none; /* Elimina el borde */
+  }
+}
+
+/* Lista de redes sociales dentro del footer */
+.footer__socials {
+  margin-left: 0; /* Sin margen a la izquierda */
+  margin-right: 28px;
+}
+
+@media (max-width: 899px) {
+  .footer__socials {
+	margin-right: 28px;
+    margin-bottom: 30px; /* Espaciado inferior en pantallas pequeñas */
+  }
+}
+
+/* Envoltura del encabezado (header) */
+.header__wrapper {
+  -webkit-transition: 0.42s ease-in; /* Transición suave en navegadores Webkit */
+  -o-transition: 0.42s ease-in; /* Transición suave en navegadores Opera */
+  transition: 0.42s ease-in; /* Transición suave al aplicar cambios en el encabezado */
+}
+
+/* Estado activo del encabezado: cambia el color de fondo */
+.header__wrapper--active {
+  background-color: #C5B27D; /* Fondo dorado cuando está activo */
+}
+
+/* Contenedor del encabezado cuando es fijo y está activo */
+.header__wrapper--active .header__container--fixed {
+  background: #C5B27D; /* Fondo dorado cuando el contenedor del encabezado está fijo */
+}
+
+.copy__text {
+  margin: 0 0 10px; /* Espaciado inferior */
+  color: #9dc16e;
+}
+
+/* Configuración de estilo general para el HTML */
+html {
+	scroll-behavior: smooth; /* Desplazamiento suave al hacer clic en los enlaces */
+	-webkit-box-sizing: border-box; /* Establece el tamaño de la caja en Webkit */
+	box-sizing: border-box; /* Establece el tamaño de la caja para todos los elementos */
+}
